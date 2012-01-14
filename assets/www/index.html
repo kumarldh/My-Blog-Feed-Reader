@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>PhoneGap</title>
+<link rel="stylesheet" href="css/base.css" />
+<script type="text/javascript" charset="utf-8" src="js/phonegap-1.2.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.6.4.js"></script>
+<script type="text/javascript" charset="utf-8">
+$( function() {
+    var XMLURI = 'http://www.kumarchetan.com/blog/feed/';
+    $.ajax({
+        url: XMLURI,
+        success: function(xml){
+            setTimeout(
+            function(){
+                var blogdescription = $(xml).find('channel description:first'),
+	                blogtitle = $(xml).find('channel title:first'),
+	                bloglink = $(xml).find('channel link:first'),
+	                blogdescription = blogdescription.text(),
+	                blogtitle = '<a href="' + bloglink.text() +'" class="bloglink">' + blogtitle.text() + '</a>',
+	                feedItem = '';
+	            $(xml).find( "item" ).each(
+	                function(){
+	                    var item = $(this), 
+	                        title =  item.find('title').text(),
+	                        link =  item.find('link').text(),
+	                        description =  item.find('description').text(),
+	                        pubDate =  item.find('pubDate').text();
+	                    feedItem = feedItem + '<div class="feeditem">';
+	                    feedItem = feedItem + '<a href="' + link + '" class="feeditemlink">';
+	                    feedItem = feedItem + '<span class="feeditemtitle">' + title+ '</span>';
+	                    feedItem = feedItem + '</a>';
+	                    feedItem = feedItem + '<span class="feeditempubDate">' + pubDate + '</span>';
+	                    feedItem = feedItem + '<p class="feeditemdescription">' + description + '</p>';
+	                    feedItem = feedItem + '</div>';
+	            });
+	            $('#blogheader').html(blogtitle);
+	            $('#blogdescription').html(blogdescription);
+	            $('#content').append(feedItem);
+                
+            }
+            , 5000);
+        },
+        error: function(){
+        	$('#blogheader').html('<a href="http://www.youtube.com/watch?feature=player_detailpage&v=WUUptX0i55g#t=43s" class="bloglink">PC LOAD LETTER</a>');
+        },
+        dataType: "xml"
+    });
+    document.addEventListener("deviceready", onDeviceReady, false);
+});
+</script>
+</head>
+<body>
+	<div data-role="page" id="home">
+		<div data-role="header">
+			<h1 id="blogheader">Loading...</h1>
+            <p id="blogdescription"></p>
+		</div>
+		<div data-role="content" id="content">
+		</div>
+	</div>
+</body>
+</html>
