@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>PhoneGap</title>
+<title>My Blog Feed Reader</title>
 <link rel="stylesheet" href="css/base.css" />
 <script type="text/javascript" charset="utf-8" src="js/phonegap-1.2.0.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/jquery-1.6.4.js"></script>
@@ -42,7 +42,7 @@ $( function() {
             , 5000);
         },
         error: function(){
-        	$('#blogheader').html('<a href="http://www.youtube.com/watch?feature=player_detailpage&v=WUUptX0i55g#t=43s" class="bloglink">PC LOAD LETTER</a>');
+        	$('#blogheader').html('<a href="http://www.youtube.com/watch?v=WUUptX0i55g#t=22s" class="bloglink">PC LOAD LETTER</a>');
         },
         dataType: "xml"
     });
@@ -54,7 +54,7 @@ $( function() {
 	<div data-role="page" id="home">
 		<div data-role="header">
 			<h1 id="blogheader">Loading...</h1>
-            <p id="blogdescription"></p>
+            <p id="blogdescription">This application requires a working internet connection.</p>
 		</div>
 		<div data-role="content" id="content">
 		</div>
